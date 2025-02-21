@@ -182,6 +182,21 @@ onMounted(fetchExchangeRate);
             <span class="currency-flag">{{ toCurrency }}</span>
             <ChevronUpDownIcon class="h-5 w-5" />
           </div>
+          <div v-if="showToDropdown" class="currency-dropdown">
+          <input type="text" v-model="searchQuery" placeholder="Search currency..." @click.stop />
+          <div class="currency-list">
+            <div
+              v-for="currency in filteredCurrencies"
+              :key="currency.code"
+              class="currency-option"
+              @click="selectCurrency('from', currency)"
+            >
+              <span class="currency-flag">{{ currency.flag }}</span>
+              <span class="currency-code">{{ currency.code }}</span>
+              <span class="currency-name">{{ currency.name }}</span>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -240,6 +255,7 @@ h1 {
 .currency-list {
   max-height: 250px;
   overflow-y: auto;
+  color: #34495e;
 }
 
 /* Currency Option */
@@ -338,6 +354,7 @@ h1 {
 
 /* Input group */
 .input-group {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* ✅ Aligns labels to the left */
@@ -412,6 +429,7 @@ input {
   color: #2c3e50;
   font-weight: bold;
   padding: 0.75rem;
+  position: relative;
   border-right: 1px solid #ffffff;
 }
 
