@@ -1,2 +1,2 @@
-npm i
+npm install then 
 npm run dev
